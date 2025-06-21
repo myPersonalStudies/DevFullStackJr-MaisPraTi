@@ -1,0 +1,36 @@
+// Crie um jogo onde o computador vai sortear um número entre 1 e 5. O jogador vai
+// tentar descobrir qual foi o valor sorteado.
+
+const readline = require('readline');
+
+const rl = readline.createInterface({
+
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question('Digite um número entre 1 e 5: ', (numero) => {
+
+    const numeroSorteado = Math.floor(Math.random() * 5) + 1;
+
+    while (numero !== numeroSorteado) {
+
+        rl.question('Digite um número entre 1 e 5: ', (numero) => {
+
+            if (numero === numeroSorteado) { 
+                console.log('Você acertou!') 
+                rl.close();
+            }
+
+            else { console.log('Você errou!') }
+
+        });
+    }
+});
+
+const verificaNumero = (numero, numeroSorteado) => {
+
+    if (numero === numeroSorteado) { return true }
+
+    else { return false }
+}
