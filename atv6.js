@@ -4,33 +4,35 @@
 const readline = require('readline');
 
 const rl = readline.createInterface({
-
     input: process.stdin,
     output: process.stdout
 });
 
-rl.question('Digite um número entre 1 e 5: ', (numero) => {
-
-    const numeroSorteado = Math.floor(Math.random() * 5) + 1;
-
-    while (numero !== numeroSorteado) {
-
-        rl.question('Digite um número entre 1 e 5: ', (numero) => {
-
-            if (numero === numeroSorteado) { 
-                console.log('Você acertou!') 
-                rl.close();
-            }
-
-            else { console.log('Você errou!') }
-
-        });
-    }
-});
-
 const verificaNumero = (numero, numeroSorteado) => {
+    return numero == numeroSorteado;
+};
 
-    if (numero === numeroSorteado) { return true }
+const fazerPergunta = () => {
 
-    else { return false }
-}
+    rl.question('Digite um número entre 1 e 5: ', (numero) => {
+
+        if (verificaNumero(numero, numeroSorteado)) {
+
+            console.log('Você acertou!');
+            rl.close();
+        } 
+        
+        else {
+            
+            console.log('Você errou! Tente novamente.');
+            fazerPergunta();
+        }
+    });
+};
+
+const numeroSorteado = Math.floor(Math.random() * 5) + 1;
+
+console.log('Jogo iniciado! Tente adivinhar o número sorteado entre 1 e 5.');
+
+// Inicia o jogo
+fazerPergunta();
